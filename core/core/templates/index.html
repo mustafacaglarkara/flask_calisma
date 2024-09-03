@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Anasayfa
+{% endblock %}
+
+{% block content %}
+<div class="mb-12">
+    Hoşgeldin {{ user.username }}
+    {% if score is not none %}
+    <div>
+        <h3>Puanınız: {{ score }}</h3>
+    </div>
+    {% endif %}
+</div>
+<div class="mb-12">
+    Sorular
+    <hr>
+    <form action="/" method="POST">
+        {% for question in questions %}
+        <div>
+            <p>{{ loop.index }}. Soru: {{ question.question_text }}</p>
+            <input type="radio" name="question_{{ question.id }}" value="1"> {{ question.option1 }}<br>
+            <input type="radio" name="question_{{ question.id }}" value="2"> {{ question.option2 }}<br>
+            <input type="radio" name="question_{{ question.id }}" value="3"> {{ question.option3 }}<br>
+        </div>
+        {% endfor %}
+        <input type="submit" value="Gönder">
+    </form>
+
+
+</div>
+
+{% endblock %}
